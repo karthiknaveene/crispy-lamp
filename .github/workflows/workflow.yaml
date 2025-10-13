@@ -1,0 +1,49 @@
+name: GH Workflow - 1
+
+on:
+    push:
+      branches:
+        - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: compile changed
+        run: echo "compile started..."
+
+      - name: produce-binary
+        run: sleep 10
+
+      - name: push-binary
+        run: echo "binary pushing..."
+
+  test:
+    runs-on: ubuntu-latest
+    needs: [build]   # Depends on 'build' job
+    steps:
+      - name: Run tests
+        run: echo "tests running..."
+
+      - name: Collect test results changed
+        run: sleep 20
+
+      - name: Publish test results changed
+        run: echo "test results published..."
+
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build, test]   # Depends on both 'build' and 'test' jobs
+    steps:
+      - name: Deploy sleep change
+        run: sleep 15
+      - name: Deploy
+        run: echo "Deploying..."
+
+
+
+        
+     
+
+
